@@ -1,0 +1,20 @@
+<form action="/songs/new" method="post">
+  <fieldset>
+    <legend>Song Values</legend>
+    <p>
+      <label for="title">Title</label>
+      <input name="title" id="title" type="text" placeholder="Title" value="{{ song.title or '' }}">
+      <span class="error">{{ song.errors['title'] }}</span>
+    </p>
+    <p>
+      <label for="artist">Artist</label>
+      <input name="artist" id="artist" type="text" placeholder="Artist" value="{{ song.artist or '' }}">
+      <span class="error">{{ song.errors['artist'] }}</span>
+    </p>
+    <button>Save</button>
+  </fieldset>
+</form>
+
+<p>
+  <a href="/songs">Back</a>
+</p>

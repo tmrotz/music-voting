@@ -1,0 +1,26 @@
+[
+  {
+    "id": 2,
+    "title": "Carson",
+    "artist": "Gross",
+    "errors": {}
+  },
+  {
+    "id": 5,
+    "title": "Joe",
+    "artist": "Blow",
+    "errors": {}
+  },
+  {
+    "id": 6,
+    "title": "This Child of Mine",
+    "artist": "Aretha Franklin",
+    "errors": {}
+  },
+  {
+    "id": 7,
+    "title": "Derezzed",
+    "artist": "Daft Punk",
+    "errors": {}
+  }
+]

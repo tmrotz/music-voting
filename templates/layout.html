@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="">
+
+<head>
+    <title>Song App</title>
+    <script src="../static/js/htmx.js"></script>
+</head>
+
+<body hx-boost="true">
+    <main>
+        <header>
+            <h1>
+                <all-caps>songs.app</all-caps>
+                <sub-title>A Demo Songs Application</sub-title>
+            </h1>
+        </header>
+        {% for message in get_flashed_messages() %}
+        <div class="flash">{{message}}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+</body >
+
+</html >
