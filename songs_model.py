@@ -5,7 +5,7 @@ import time
 # ========================================================
 # Song Model
 # ========================================================
-PAGE_SIZE = 10
+PAGE_SIZE = 5
 
 class Song:
     # mock songs database

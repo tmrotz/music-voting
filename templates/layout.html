@@ -3,10 +3,21 @@
 
 <head>
     <title>Song App</title>
-    <script src="../static/js/htmx.js"></script>
+    <script src="/static/js/htmx.js"> </script>
+    <script>
+        htmx.onLoad(function () {
+            htmx.logAll()
+        })
+    </script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 </head>
 
-<body hx-boost="true">
+<body hx-boost="true" class="container">
     <main>
         <header>
             <h1>
@@ -19,6 +30,7 @@
         {% endfor %}
         {% block content %}{% endblock %}
     </main>
-</body >
+    <footer></footer>
+</body>
 
-</html >
+</html>
