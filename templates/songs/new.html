@@ -11,6 +11,11 @@
       <input name="artist" id="artist" type="text" placeholder="Artist" value="{{ song.artist or '' }}">
       <span class="error">{{ song.errors['artist'] }}</span>
     </p>
+    <p>
+      <label for="uri">URI</label>
+      <input name="uri" id="uri" type="text" placeholder="URI" value="{{ song.uri or '' }}">
+      <span class="error">{{ song.errors['uri'] }}</span>
+    </p>
     <button>Save</button>
   </fieldset>
 </form>

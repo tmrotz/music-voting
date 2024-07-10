@@ -33,7 +33,8 @@ def create_song():
     s = Song(
         None,
         request.form['title'],
-        request.form['artist'])
+        request.form['artist'],
+        request.form['uri'])
     if s.save():
         flash("Created New Song!")
         return redirect("/songs")
@@ -56,7 +57,8 @@ def songs_edit_post(song_id=0):
     s = Song.find(song_id)
     s.update(
       request.form['title'],
-      request.form['artist'])
+      request.form['artist'],
+      request.form['uri'])
     if s.save():
         flash("Updated Song!")
         return redirect(f"/songs/{song_id}")

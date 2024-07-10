@@ -13,6 +13,7 @@
     <tr>
       <th scope="col">Title</th>
       <th>Artist</th>
+      <th>URI</th>
       <th></th>
       <th></th>
     </tr>
@@ -22,6 +23,7 @@
     <tr>
       <th scope="row">{{ song.title }}</th>
       <td>{{ song.artist }}</td>
+      <td>{{ song.uri }}</td>
       <td><a href="/songs/{{ song.id }}/edit">Edit</a></td>
       <td><a href="/songs/{{ song.id }}">View</a></td>
     </tr>
@@ -33,6 +35,7 @@
   <fieldset class="grid">
     <input name="title" id="title" type="text" placeholder="Title">
     <input name="artist" id="artist" type="text" placeholder="Artist">
+    <input name="uri" id="uri" type="text" placeholder="URI">
     <input name="submit" type="submit" value="Save" />
   </fieldset>
 </form>

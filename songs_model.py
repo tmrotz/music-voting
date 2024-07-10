@@ -11,25 +11,31 @@ class Song:
     # mock songs database
     db = {}
 
-    def __init__(self, id_=None, title=None, artist=None):
+    def __init__(self, id_=None, title=None, artist=None, uri=None):
         self.id = id_
         self.title = title
         self.artist = artist
+        self.uri = uri
         self.errors = {}
 
     def __str__(self):
         return json.dumps(self.__dict__, ensure_ascii=False)
 
-    def update(self, title, artist):
+    def update(self, title, artist, uri):
         self.title = title
         self.artist = artist
+        self.uri = uri
 
     def validate(self):
         if not self.title:
             self.errors['title'] = "Title Required"
-        existing_song = next(filter(lambda c: c.id != self.id and c.title == self.title, Song.db.values()), None)
+        if not self.artist:
+            self.errors['artist'] = "Artist Required"
+        if not self.uri:
+            self.errors['uri'] = "URI Required"
+        existing_song = next(filter(lambda s: s.id != self.id and s.uri == self.uri, Song.db.values()), None)
         if existing_song:
-            self.errors['title'] = "Title Must Be Unique"
+            self.errors['uri'] = "URI Must Be Unique"
         return len(self.errors) == 0
 
     def save(self):
@@ -64,11 +70,12 @@ class Song:
     @classmethod
     def search(cls, text):
         result = []
-        for c in cls.db.values():
-            match_title = c.title is not None and text in c.title
-            match_artist = c.artist is not None and text in c.artist
-            if match_title or match_artist:
-                result.append(c)
+        for s in cls.db.values():
+            match_title = s.title is not None and text in s.title
+            match_artist = s.artist is not None and text in s.artist
+            match_uri = s.uri is not None and text in s.uri
+            if match_title or match_artist or match_uri:
+                result.append(s)
         return result
 
     @classmethod
@@ -77,11 +84,11 @@ class Song:
             songs = json.load(songs_file)
             cls.db.clear()
             for s in songs:
-                cls.db[s['id']] = Song(s['id'], s['title'], s['artist'])
+                cls.db[s['id']] = Song(s['id'], s['title'], s['artist'], s['uri'])
 
     @staticmethod
     def save_db():
-        out_arr = [c.__dict__ for c in Song.db.values()]
+        out_arr = [s.__dict__ for s in Song.db.values()]
         with open("songs.json", "w") as f:
             json.dump(out_arr, f, indent=2)
 

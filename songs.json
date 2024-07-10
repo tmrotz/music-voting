@@ -1,56 +1,16 @@
 [
   {
     "id": 2,
-    "title": "Carson",
-    "artist": "Gross",
-    "errors": {}
-  },
-  {
-    "id": 5,
-    "title": "Joe",
-    "artist": "Blow",
-    "errors": {}
-  },
-  {
-    "id": 6,
-    "title": "This Child of Mine",
-    "artist": "Aretha Franklin",
-    "errors": {}
-  },
-  {
-    "id": 7,
-    "title": "Derezzed",
-    "artist": "Daft Punk",
-    "errors": {}
-  },
-  {
-    "id": 8,
     "title": "asdf",
     "artist": "asdf",
+    "uri": "asdf",
     "errors": {}
   },
   {
-    "id": 9,
+    "id": 3,
     "title": "qwerty",
     "artist": "qwerty",
-    "errors": {}
-  },
-  {
-    "id": 10,
-    "title": "asdgergi",
-    "artist": "xhljkdfguoidfs",
-    "errors": {}
-  },
-  {
-    "id": 11,
-    "title": "38",
-    "artist": "xfj80",
-    "errors": {}
-  },
-  {
-    "id": 12,
-    "title": "layi7wr",
-    "artist": "xgy;893",
+    "uri": "qwerty",
     "errors": {}
   }
 ]

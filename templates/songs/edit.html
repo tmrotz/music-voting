@@ -11,13 +11,16 @@
       <input name="artist" id="artist" type="text" placeholder="Artist" value="{{ song.artist }}">
       <span class="error">{{ song.errors['artist'] }}</span>
     </p>
+    <p>
+      <label for="uri">URI</label>
+      <input name="uri" id="uri" type="text" placeholder="URI" value="{{ song.uri }}">
+      <span class="error">{{ song.errors['uri'] }}</span>
+    </p>
     <button>Save</button>
   </fieldset>
 </form>
 
-<button hx-delete="/songs/{{ song.id }}"
-  hx-target="body"
-  hx-push-url="true"
+<button hx-delete="/songs/{{ song.id }}" hx-target="body" hx-push-url="true"
   hx-confirm="Are you sure you want to delete this contact?">
   Delete Song
 </button>
