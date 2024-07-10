@@ -1,6 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request
 from songs_model import Song
-from spotify import bp
+import spotify
 
 Song.load_db()
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 app.secret_key = b'hypermedia rocks'
 
-app.register_blueprint(bp)
+app.register_blueprint(spotify.bp)
 
 @app.route("/")
 def index():
@@ -71,3 +71,10 @@ def songs_delete(song_id=0):
     song.delete()
     flash("Deleted Song!")
     return redirect("/songs", 303)
+
+@app.route("/songs/<song_id>/uri", methods=['GET'])
+def songs_uri_get(song_id=0):
+    s = Song.find(song_id)
+    s.uri = request.args.get('uri')
+    s.validate()
+    return s.errors.get('uri') or ''
