@@ -28,6 +28,18 @@
       <td><a href="/songs/{{ song.id }}">View</a></td>
     </tr>
   {% endfor %}
+  {% if songs|length == 2 %}
+    <tr>
+      <td colspan="5" style="text-align: center">
+        <button hx-target="closest tr"
+          hx-swap="outerHTML"
+          hx-select="tbody > tr"
+          hx-get="/songs?page={{ page + 1 }}">
+          Load More
+        </button>
+      </td>
+    </tr>
+  {% endif %}
   </tbody>
 </table>
 
@@ -45,7 +57,7 @@
     {% if page > 1 %}
       <a href="/songs?page={{ page - 1 }}">Previous</a>
     {% endif %}
-    {% if songs|length == 5 %}
+    {% if songs|length == 2 %}
       <a href="/songs?page={{ page + 1 }}">Next</a>
     {% endif %}
   </span>

@@ -1,5 +1,12 @@
 [
   {
+    "id": 1,
+    "title": "1234",
+    "artist": "1234",
+    "uri": "1234",
+    "errors": {}
+  },
+  {
     "id": 2,
     "title": "asdf",
     "artist": "asdf",
@@ -11,6 +18,20 @@
     "title": "qwerty",
     "artist": "qwerty",
     "uri": "qwerty",
+    "errors": {}
+  },
+  {
+    "id": 4,
+    "title": "9876",
+    "artist": "9876",
+    "uri": "9876",
+    "errors": {}
+  },
+  {
+    "id": 5,
+    "title": "zxcv",
+    "artist": "zxcv",
+    "uri": "zxcv",
     "errors": {}
   }
 ]
