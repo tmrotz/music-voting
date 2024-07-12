@@ -4,7 +4,11 @@
 
 <form action="/songs" method="get" class="tool-bar">
   <label for="search">Search Term</label>
-  <input id="search" type="search" name="q" value="{{ request.args.get('q') or '' }}" />
+  <input id="search" type="search" name="q" value="{{ request.args.get('q') or '' }}"
+    hx-get="/songs"
+    hx-trigger="search, keyup delay:500ms changed"
+    hx-target="tbody"
+    hx-select="tbody tr" />
   <input type="submit" value="Search"/>
 </form>
 
@@ -19,15 +23,19 @@
     </tr>
   </thead>
   <tbody>
-  {% for song in songs %}
+  {% include 'songs/rows.html' %}
+  {% if songs|length == 4 %}
     <tr>
-      <th scope="row">{{ song.title }}</th>
-      <td>{{ song.artist }}</td>
-      <td>{{ song.uri }}</td>
-      <td><a href="/songs/{{ song.id }}/edit">Edit</a></td>
-      <td><a href="/songs/{{ song.id }}">View</a></td>
+      <td colspan="5" style="text-align: center">
+        <button hx-target="closest tr"
+          hx-swap="outerHTML"
+          hx-select="tbody > tr"
+          hx-get="/songs?page={{ page + 1 }}">
+          Load More
+        </button>
+      </td>
     </tr>
-  {% endfor %}
+  {% endif %}
   </tbody>
 </table>
 
@@ -45,7 +53,7 @@
     {% if page > 1 %}
       <a href="/songs?page={{ page - 1 }}">Previous</a>
     {% endif %}
-    {% if songs|length == 5 %}
+    {% if songs|length == 2 %}
       <a href="/songs?page={{ page + 1 }}">Next</a>
     {% endif %}
   </span>

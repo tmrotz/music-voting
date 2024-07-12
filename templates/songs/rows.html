@@ -1,0 +1,9 @@
+{% for song in songs %}
+<tr>
+  <td>{{ song.title }}</td>
+  <td>{{ song.artist }}</td>
+  <td>{{ song.uri }}</td>
+  <td><a href="/songs/{{ song.id }}/edit">Edit</a></td>
+  <td><a href="/songs/{{ song.id }}">View</a></td>
+</tr>
+{% endfor %}

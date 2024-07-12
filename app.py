@@ -20,6 +20,8 @@ def songs():
     page = int(request.args.get("page", 1))
     if search is not None:
         songs_set = Song.search(search)
+        if request.headers.get('HX-Trigger') == 'search':
+            return render_template("songs/rows.html", songs=songs_set)
     else:
         songs_set = Song.all(page)
     return render_template("songs/index.html", songs=songs_set, page=page)
