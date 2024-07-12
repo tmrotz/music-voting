@@ -36,6 +36,17 @@
       </td>
     </tr>
   {% endif %}
+  <!-- {% if songs|length == 4 %} -->
+  <!--   <tr> -->
+  <!--     <td colspan="5" style="text-align: center"> -->
+  <!--       <span hx-target="closest tr" -->
+  <!--         hx-trigger="revealed" -->
+  <!--         hx-swap="outerHTML" -->
+  <!--         hx-select="tbody > tr" -->
+  <!--         hx-get="/songs?page={{ page + 1 }}">Loading More...</span> -->
+  <!--     </td> -->
+  <!--   </tr> -->
+  <!-- {% endif %} -->
   </tbody>
 </table>
 
@@ -53,7 +64,7 @@
     {% if page > 1 %}
       <a href="/songs?page={{ page - 1 }}">Previous</a>
     {% endif %}
-    {% if songs|length == 2 %}
+    {% if songs|length == 4 %}
       <a href="/songs?page={{ page + 1 }}">Next</a>
     {% endif %}
   </span>
