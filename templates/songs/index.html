@@ -4,13 +4,9 @@
 
 <form action="/songs" method="get" class="tool-bar">
   <label for="search">Search Term</label>
-  <input id="search" type="search" name="q" value="{{ request.args.get('q') or '' }}"
-    hx-get="/songs"
-    hx-trigger="search, keyup delay:500ms changed"
-    hx-target="tbody"
-    hx-select="tbody tr"
-    hx-push-url="true" />
-  <input type="submit" value="Search"/>
+  <input id="search" type="search" name="q" value="{{ request.args.get('q') or '' }}" hx-get="/songs"
+    hx-trigger="search, keyup delay:500ms changed" hx-target="tbody" hx-select="tbody tr" hx-push-url="true" />
+  <input type="submit" value="Search" />
 </form>
 
 <table class="striped">
@@ -24,30 +20,21 @@
     </tr>
   </thead>
   <tbody>
-  {% include 'songs/rows.html' %}
-  {% if songs|length == 4 %}
+    {% include 'songs/rows.html' %}
+    {% if songs|length == 4 %}
     <tr>
       <td colspan="5" style="text-align: center">
-        <button hx-target="closest tr"
-          hx-swap="outerHTML"
-          hx-select="tbody > tr"
-          hx-get="/songs?page={{ page + 1 }}">
+        <button hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr" hx-get="/songs?page={{ page + 1 }}">
           Load More
         </button>
+        <!-- <span hx-target="closest tr" -->
+        <!--   hx-trigger="revealed" -->
+        <!--   hx-swap="outerHTML" -->
+        <!--   hx-select="tbody > tr" -->
+        <!--   hx-get="/songs?page={{ page + 1 }}">Loading More...</span> -->
       </td>
     </tr>
-  {% endif %}
-  <!-- {% if songs|length == 4 %} -->
-  <!--   <tr> -->
-  <!--     <td colspan="5" style="text-align: center"> -->
-  <!--       <span hx-target="closest tr" -->
-  <!--         hx-trigger="revealed" -->
-  <!--         hx-swap="outerHTML" -->
-  <!--         hx-select="tbody > tr" -->
-  <!--         hx-get="/songs?page={{ page + 1 }}">Loading More...</span> -->
-  <!--     </td> -->
-  <!--   </tr> -->
-  <!-- {% endif %} -->
+    {% endif %}
   </tbody>
 </table>
 
@@ -63,10 +50,10 @@
 <div>
   <span style="float: right">
     {% if page > 1 %}
-      <a href="/songs?page={{ page - 1 }}">Previous</a>
+    <a href="/songs?page={{ page - 1 }}">Previous</a>
     {% endif %}
     {% if songs|length == 4 %}
-      <a href="/songs?page={{ page + 1 }}">Next</a>
+    <a href="/songs?page={{ page + 1 }}">Next</a>
     {% endif %}
   </span>
 </div>
@@ -76,4 +63,3 @@
 </p>
 
 {% endblock %}
-
