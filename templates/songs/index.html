@@ -5,38 +5,47 @@
 <form action="/songs" method="get" class="tool-bar">
   <label for="search">Search Term</label>
   <input id="search" type="search" name="q" value="{{ request.args.get('q') or '' }}" hx-get="/songs"
-    hx-trigger="search, keyup delay:500ms changed" hx-target="tbody" hx-select="tbody tr" hx-push-url="true" />
+    hx-trigger="search, keyup delay:500ms changed" hx-target="tbody" hx-select="tbody tr" hx-push-url="true"
+    hx-indicator="#spinner" />
+  <img id="spinner" class="htmx-indicator" src="static/img/spinning-circles.svg" alt="Request in flight..." />
   <input type="submit" value="Search" />
 </form>
 
-<table class="striped">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th>Artist</th>
-      <th>URI</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% include 'songs/rows.html' %}
-    {% if songs|length == 4 %}
-    <tr>
-      <td colspan="5" style="text-align: center">
-        <button hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr" hx-get="/songs?page={{ page + 1 }}">
-          Load More
-        </button>
-        <!-- <span hx-target="closest tr" -->
-        <!--   hx-trigger="revealed" -->
-        <!--   hx-swap="outerHTML" -->
-        <!--   hx-select="tbody > tr" -->
-        <!--   hx-get="/songs?page={{ page + 1 }}">Loading More...</span> -->
-      </td>
-    </tr>
-    {% endif %}
-  </tbody>
-</table>
+<form>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th scope="col">Title</th>
+        <th>Artist</th>
+        <th>URI</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'songs/rows.html' %}
+      {% if songs|length == 4 %}
+      <tr>
+        <td colspan="6" style="text-align: center">
+          <button hx-target="closest tr" hx-swap="outerHTML" hx-select="tbody > tr" hx-get="/songs?page={{ page + 1 }}">
+            Load More
+          </button>
+          <!-- <span hx-target="closest tr" -->
+          <!--   hx-trigger="revealed" -->
+          <!--   hx-swap="outerHTML" -->
+          <!--   hx-select="tbody > tr" -->
+          <!--   hx-get="/songs?page={{ page + 1 }}">Loading More...</span> -->
+        </td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+  <button hx-delete="/songs" hx-confirm="Are you sure you want to delete these songs?" hx-target="body">
+    Delete Selected Songs
+  </button>
+</form>
 
 <form action="/songs/new" method="post">
   <fieldset class="grid">
@@ -59,7 +68,10 @@
 </div>
 
 <p>
-  <a href="/songs/new">Add song</a>
+  <a href="/songs/new">Add Song</a>
+  <span hx-get="/songs/count" hx-trigger="revealed">
+    <img id="spinner" class="htmx-indicator" src="static/img/spinning-circles.svg" alt="Request in flight..." />
+  </span>
 </p>
 
 {% endblock %}
