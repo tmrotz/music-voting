@@ -1,6 +1,8 @@
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request, send_file
+import archiver
 from songs_model import Song
 import spotify
+from archiver import Archiver
 
 Song.load_db()
 
@@ -24,7 +26,7 @@ def songs():
             return render_template("songs/rows.html", songs=songs_set, page=page)
     else:
         songs_set = Song.all(page)
-    return render_template("songs/index.html", songs=songs_set, page=page)
+    return render_template("songs/index.html", songs=songs_set, page=page, archiver=Archiver.get())
 
 @app.route("/songs", methods=['DELETE'])
 def songs_delete_all():
@@ -100,3 +102,28 @@ def songs_uri_get(song_id=0):
     s.uri = request.args.get('uri')
     s.validate()
     return s.errors.get('uri') or ''
+
+@app.route("/songs/archive", methods=["POST"])
+def start_archive():
+    archiver = Archiver.get()
+    archiver.run()
+    return render_template("archive_ui.html", archiver=archiver)
+
+
+@app.route("/songs/archive", methods=["GET"])
+def archive_status():
+    archiver = Archiver.get()
+    return render_template("archive_ui.html", archiver=archiver)
+
+
+@app.route("/songs/archive/file", methods=["GET"])
+def archive_content():
+    archiver = Archiver.get()
+    return send_file(archiver.archive_file(), "archive.json", as_attachment=True)
+
+
+@app.route("/songs/archive", methods=["DELETE"])
+def reset_archive():
+    archiver = Archiver.get()
+    archiver.reset()
+    return render_template("archive_ui.html", archiver=archiver)
